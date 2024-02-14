@@ -5,4 +5,4 @@ docker-compuse up
      and then
 
 
-     docker run -it olesia-homework1 -v $(pwd):/
+     docker run -it olesia-homework1
