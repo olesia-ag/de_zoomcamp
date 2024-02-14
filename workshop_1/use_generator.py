@@ -12,7 +12,7 @@ sum = 0
 for index, sqrt_value in enumerate(generator):
   sum += sqrt_value
 
-print(sum)
+print('sum', sum)
 
 limit = 13
 generator = square_root_generator(limit)
