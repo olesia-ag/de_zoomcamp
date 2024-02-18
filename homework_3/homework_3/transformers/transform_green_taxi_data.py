@@ -24,6 +24,7 @@ def transform(data, *args, **kwargs):
                     .str.replace('(?<=[a-z])(?=[A-Z])', '_', regex=True)
                     .str.lower()
     )
+    print(data.dtypes)
     return data
 
 

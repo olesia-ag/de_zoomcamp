@@ -2,6 +2,7 @@ import io
 import pandas as pd
 import requests
 import json
+from datetime import datetime
 if 'data_loader' not in globals():
     from mage_ai.data_preparation.decorators import data_loader
 if 'test' not in globals():
@@ -15,6 +16,8 @@ def load_data_from_api(*args, **kwargs):
     taxi_dtypes = {
         'VendorID':pd.Int64Dtype(),
         'passenger_count':pd.Int64Dtype(),
+        'lpep_pickup_datetime': str,
+        'lpep_dropoff_datetime': str,
         'trip_distance':float,
         'RatecodeID':float,
         'store_and_fwd_flag':str,
@@ -30,7 +33,6 @@ def load_data_from_api(*args, **kwargs):
         'total_amount':float,
         'congestion_surcharge':float
     }
-    parse_dates = ['lpep_pickup_datetime', 'lpep_dropoff_datetime']
     
     path = 'https://d37ci6vzurychx.cloudfront.net/trip-data/green_tripdata_2022-'    
     main_df = pd.DataFrame()
@@ -43,7 +45,7 @@ def load_data_from_api(*args, **kwargs):
             url = path+str(i)+'.parquet' 
         df = pd.read_parquet(url, engine='auto', columns=taxi_dtypes)
         main_df=pd.concat([main_df, df])
-
+    
     return main_df
 
 
